@@ -29,7 +29,7 @@ export const MessageItem = ({ name, lastMessage, id,handlerSelectedFriend }: Mes
           flex: 1
         }}
       >
-        <div>
+        <div style={{maxWidth: "178px"}}>
           <p style={{marginBottom: "5px", fontWeight: 500}}>{name}</p>
           <p style={{fontSize: "15px"}}>{lastMessage}</p>
         </div>
