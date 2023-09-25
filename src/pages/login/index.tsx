@@ -20,8 +20,8 @@ const Login = () => {
         uid: user.uid,
         providerId: _tokenResponse.providerId,
         keywords: generateKeywords(user.displayName),
-        friends: []
-      })
+        friends: [],
+      });
     }
   };
 

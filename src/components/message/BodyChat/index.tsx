@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import { AppContext } from "../../../Context/app-provider";
 import { AuthContext } from "../../../Context/auth-provider";
 import { PRIMARY_COLOR } from "../../../constants";
-import { addDocument } from "../../../utils";
+import { addDocument, getIdYouTubeVideo } from "../../../utils";
 import { ChatItem } from "./chat-item";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
@@ -23,13 +23,16 @@ export const BodyChat = () => {
   const handlerOnSubmit = async () => {
     if (!selectedRoom) return;
     const roomsRef = doc(db, "rooms", selectedRoom.id);
-    await addDocument("messages", {
+    const videoYoutubeId = getIdYouTubeVideo(inputValue);
+    const requestMessage : any = {
       text: inputValue,
       roomId: selectedRoom?.id,
       photoURL: user?.photoURL,
       displayName: user?.displayName,
       uid: user?.uid,
-    });
+    };
+    if(videoYoutubeId) requestMessage["isPlaying"] = false;
+    await addDocument("messages", requestMessage);
     await updateDoc(roomsRef, {
       lastMessage: inputValue,
     });
@@ -43,17 +46,20 @@ export const BodyChat = () => {
         messageListRef.current.scrollHeight + 50;
     }
   }, [messages]);
+
   return (
     <div className="body-chat">
       <div className="list-chat" ref={messageListRef}>
         {messages.map((message) => (
           <ChatItem
             key={message.id}
+            id={message.id}
             name={message?.displayName}
             message={message.text}
             isMe={message.uid === user?.uid}
             photoURL={message.photoURL}
             createdAt={message.createdAt?.seconds}
+            isPlaying={message?.isPlaying}
           />
         ))}
       </div>

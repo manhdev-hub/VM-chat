@@ -38,7 +38,7 @@ export const useFireStore = (
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const documents: any = [];
-      querySnapshot.forEach((doc) => [
+      querySnapshot?.forEach((doc) => [
         documents.push({
           ...doc.data(),
           id: doc.id,

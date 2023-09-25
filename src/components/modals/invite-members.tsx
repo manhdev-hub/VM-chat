@@ -93,7 +93,7 @@ export const InviteMemberModel = () => {
       limit(20)
     );
     await onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc: any) => {
+      querySnapshot?.forEach((doc: any) => {
         documents.push({
           label: doc.data().displayName,
           value: doc.data().uid,

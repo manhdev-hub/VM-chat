@@ -48,6 +48,11 @@ export const MessageWrapper = styled.div`
 
     .chat-item{
         margin-bottom: 20px;
+        &.video-message{
+            .chat-content{
+                background-color: transparent;
+            }
+        }
     }
 
     .chat-content{
