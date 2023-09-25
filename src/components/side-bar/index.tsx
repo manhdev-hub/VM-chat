@@ -33,6 +33,7 @@ export const SideBar = () => {
           style={{ marginTop: "30px" }}
           placeholder="Search"
           prefix={<SearchOutlined />}
+          autoComplete="off"
         />
       </div>
       <Group />
