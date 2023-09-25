@@ -69,6 +69,7 @@ export const BodyChat = () => {
             placeholder="Write a message"
             onChange={handlerInputChange}
             onPressEnter={handlerOnSubmit}
+            autoComplete="off"
             autoFocus
             suffix={
               <Button className="send-button" onClick={handlerOnSubmit}>
