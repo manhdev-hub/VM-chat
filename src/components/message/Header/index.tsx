@@ -6,8 +6,13 @@ import { PRIMARY_COLOR } from "../../../constants";
 import { AuthContext } from "../../../Context/auth-provider";
 
 export const Header = () => {
-  const { selectedRoom, members, users, setIsInviteMembersVisible, setIsOpenChat } =
-    React.useContext(AppContext);
+  const {
+    selectedRoom,
+    members,
+    users,
+    setIsInviteMembersVisible,
+    setIsOpenChat,
+  } = React.useContext(AppContext);
   const { user } = React.useContext(AuthContext);
 
   const handlerVisibleInviteModal = () => {
@@ -24,12 +29,15 @@ export const Header = () => {
 
   const handlerCloseChat = () => {
     setIsOpenChat(false);
-  }
+  };
 
   return (
     <div className="message-header">
       {selectedRoom?.isFriendRoom ? (
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="back-btn" onClick={handlerCloseChat}>
+            <ArrowLeftOutlined />
+          </div>
           <Avatar src={friend?.photoURL}>
             {friend?.photoURL
               ? ""
@@ -37,29 +45,24 @@ export const Header = () => {
               ? friend.displayName.charAt(0).toLocaleUpperCase()
               : "U"}
           </Avatar>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div className="back-btn" onClick={handlerCloseChat}>
-              <ArrowLeftOutlined />
-            </div>
-            <div>
-              <p style={{ fontWeight: 500 }}>{friend?.displayName}</p>
-              <p
-                style={{
-                  color: PRIMARY_COLOR,
-                  fontSize: "12px",
-                  marginTop: "4px",
-                  fontWeight: 500,
-                }}
-              >
-                Online
-              </p>
-            </div>
+          <div>
+            <p style={{ fontWeight: 500 }}>{friend?.displayName}</p>
+            <p
+              style={{
+                color: PRIMARY_COLOR,
+                fontSize: "12px",
+                marginTop: "4px",
+                fontWeight: 500,
+              }}
+            >
+              Online
+            </p>
           </div>
         </div>
       ) : (
         <>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div className="back-btn" onClick={handlerCloseChat}>
+            <div className="back-btn" onClick={handlerCloseChat}>
               <ArrowLeftOutlined />
             </div>
             <div>
