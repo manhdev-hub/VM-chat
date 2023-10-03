@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { PRIMARY_COLOR, SIDE_BAR_WIDTH } from "../../constants";
+import { HEADER_HEIGHT, PRIMARY_COLOR, SIDE_BAR_WIDTH } from "../../constants";
 
 export const MessageWrapper = styled.div`
   width: calc(100% - ${SIDE_BAR_WIDTH}px);
+  height: 100%;
   .message-header {
     padding: 10px 15px;
     display: flex;
@@ -71,6 +72,35 @@ export const MessageWrapper = styled.div`
     &.me {
       background-color: ${PRIMARY_COLOR};
       color: #fff;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    &{
+      /* display: none; */
+    }
+
+    &.open-chat{
+      width: 100%;
+    }
+
+    .message-header{
+      width: calc(100% - 30px);
+    }
+
+    .send-message {
+      left: 0;
+      width: 100%;
+      bottom: 10px;
+      padding: 0 6px;
+    }
+
+    .list-chat{
+      height: calc(100% - ${HEADER_HEIGHT}px - 10px);
+    }
+
+    .body-chat{
+      height: 100%;
     }
   }
 `;

@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className="login">
       <Row justify="center" style={{ height: 800 }}>
-        <Col span={8}>
+        <Col md={{span: 8}} xs={{span: 22}}>
           <Title style={{ textAlign: "center" }} level={3}>
             VM Chat
           </Title>

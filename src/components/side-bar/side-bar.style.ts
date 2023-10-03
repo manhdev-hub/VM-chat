@@ -6,6 +6,7 @@ export const SideBarWrapper = styled.div`
   max-height: 100vh;
   overflow-y: auto;
   width: ${SIDE_BAR_WIDTH}px;
+  transition: all .3s;
   /* width */
   &::-webkit-scrollbar {
     width: 5px;
@@ -84,5 +85,19 @@ export const SideBarWrapper = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+
+  @media only screen and (max-width: 768px) {
+    &{
+      width: 100%;
+    }
+
+    .heading{
+      width: calc(100% - 30px);
+    }
+
+    &.open-chat{
+      display: none;
+    }
   }
 `;

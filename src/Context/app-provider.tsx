@@ -51,6 +51,9 @@ export interface IAppProvider {
   setIsAddFriendsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   users: User[];
   messages: MessageType[];
+  isOpenChat: boolean;
+  setIsOpenChat: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 export const AppContext = React.createContext<IAppProvider>(null!);
@@ -66,6 +69,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [isAddFriendsVisible, setIsAddFriendsVisible] = useState(false);
   const [searchUserList, setSearchUserList] = useState<User[]>([]);
   const [selectedRoomId, setSelectedRoomId] = useState("");
+  const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
 
   const roomsCondition: ConditionType = React.useMemo(() => {
@@ -122,7 +126,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
         isAddFriendsVisible,
         setIsAddFriendsVisible,
         users,
-        messages
+        messages,
+        isOpenChat,
+        setIsOpenChat
       }}
     >
       {children}

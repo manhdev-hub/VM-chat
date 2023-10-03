@@ -7,11 +7,13 @@ import { AllMessage } from "./Message";
 import React from "react";
 import {  signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import { AppContext } from "../../Context/app-provider";
 
 export const SideBar = () => {
   const { Title } = Typography;
+  const {isOpenChat} = React.useContext(AppContext);
   return (
-    <SideBarWrapper>
+    <SideBarWrapper className={isOpenChat ? "open-chat" : ""}>
       <div className="heading">
         <Title>VM Chat</Title>
         <Button onClick={() => signOut(auth)}>Đăng xuất</Button>
