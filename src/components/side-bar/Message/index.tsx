@@ -4,17 +4,22 @@ import React from "react";
 import { AppContext } from "../../../Context/app-provider";
 import { AuthContext } from "../../../Context/auth-provider";
 import { MessageItem } from "./message-item";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 export const AllMessage = () => {
-  const { setIsAddFriendsVisible, setSelectedRoomId } =
+  const { setIsAddFriendsVisible, setSelectedRoomId, setIsOpenChat } =
     React.useContext(AppContext);
   const { rooms, users } = React.useContext(AppContext);
+  const screens = useBreakpoint();
   const { user } = React.useContext(AuthContext);
   const handlerAddFriendVisible = () => {
     setIsAddFriendsVisible(true);
   };
 
   const handlerSelectedFriend = (roomId: string) => {
+    if(screens.sm || screens.xl || screens.xs || screens.xxl){
+      setIsOpenChat(true);
+    }
     setSelectedRoomId(roomId);
   };
 
