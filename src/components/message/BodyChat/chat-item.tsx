@@ -63,14 +63,13 @@ export const ChatItem = ({
         </div>
       );
     }
-    
+
     if (videoYoutubeId) {
       return (
         <ReactPlayer
           url={message}
-          width="560px"
-          height="315px"
           playing={isPlaying ? isPlaying : false}
+          className="react-player"
           controls={true}
           onPlay={handlerPlay}
           onPause={handlerPause}
@@ -110,7 +109,7 @@ export const ChatItem = ({
           {formatDate(createdAt)}
         </p>
       </div>
-      <div className={isMe ? "chat-content me" : "chat-content"}>
+      <div className={isMe ? "chat-content me player-wrapper" : "chat-content player-wrapper"}>
         {renderMessage()}
       </div>
     </div>

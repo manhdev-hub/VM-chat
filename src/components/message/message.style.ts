@@ -79,6 +79,23 @@ export const MessageWrapper = styled.div`
     display: none;
   }
 
+  .player-wrapper {
+    width: auto; // Reset width
+    height: auto; // Reset height
+  }
+  .react-player {
+    padding-top: 56.25%; // Percentage ratio for 16:9
+    position: relative; // Set to relative
+    width: 100%!important;
+    height: 100%!important;
+  }
+
+  .react-player > div {
+    position: absolute; 
+    top: 0;
+    left: 0;
+  }
+
   @media only screen and (max-width: 768px) {
     & {
       display: none;
@@ -101,7 +118,8 @@ export const MessageWrapper = styled.div`
     }
 
     .list-chat {
-      height: calc(100% - ${HEADER_HEIGHT}px - 10px);
+      height: calc(100% - ${HEADER_HEIGHT}px - 60px);
+      overflow-x: hidden;
     }
 
     .body-chat {
