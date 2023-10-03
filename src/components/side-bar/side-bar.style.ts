@@ -71,11 +71,18 @@ export const SideBarWrapper = styled.div`
     margin-bottom: 10px;
     gap: 10px;
     cursor: pointer;
-    &:hover{
+    &:hover {
       background: rgba(0, 185, 107, 0.09);
     }
     p {
       margin-bottom: 5px;
     }
+  }
+
+  .last-message {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 `;

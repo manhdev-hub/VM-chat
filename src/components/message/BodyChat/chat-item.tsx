@@ -1,4 +1,4 @@
-import { Avatar } from "antd";
+import { Avatar, Image } from "antd";
 import { formatRelative } from "date-fns";
 import { getIdYouTubeVideo, validationUrl } from "../../../utils";
 import ReactPlayer from "react-player";
@@ -14,6 +14,7 @@ export type ChatItemProps = {
   createdAt: number;
   id: string;
   isPlaying?: boolean;
+  type: string;
 };
 
 export const ChatItem = ({
@@ -24,6 +25,7 @@ export const ChatItem = ({
   createdAt,
   id,
   isPlaying,
+  type,
 }: ChatItemProps) => {
   const formatDate = (seconds: number) => {
     let formattedDate = "";
@@ -53,8 +55,50 @@ export const ChatItem = ({
     });
   };
 
+  const renderMessage = () => {
+    if (type === "image") {
+      return (
+        <div>
+          <Image width={300} src={message} />
+        </div>
+      );
+    }
+    
+    if (videoYoutubeId) {
+      return (
+        <ReactPlayer
+          url={message}
+          width="560px"
+          height="315px"
+          playing={isPlaying ? isPlaying : false}
+          controls={true}
+          onPlay={handlerPlay}
+          onPause={handlerPause}
+        />
+      );
+    }
+
+    if (isUrlValidation) {
+      return (
+        <a target="_blank" rel="noreferrer" href={message}>
+          {message}
+        </a>
+      );
+    }
+
+    return <p>{message}</p>;
+  };
+
   return (
-    <div className={videoYoutubeId ? `chat-item video-message` : `chat-item`}>
+    <div
+      className={
+        type === "image"
+          ? `chat-item image-message`
+          : videoYoutubeId
+          ? `chat-item video-message`
+          : `chat-item`
+      }
+    >
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <Avatar src={photoURL}>
@@ -67,23 +111,7 @@ export const ChatItem = ({
         </p>
       </div>
       <div className={isMe ? "chat-content me" : "chat-content"}>
-        {videoYoutubeId ? (
-          <ReactPlayer
-            url={message}
-            width="560px"
-            height="315px"
-            playing={isPlaying ? isPlaying : false}
-            controls={true}
-            onPlay={handlerPlay}
-            onPause={handlerPause}
-          />
-        ) : isUrlValidation ? (
-          <a target="_blank" rel="noreferrer" href={message}>
-            {message}
-          </a>
-        ) : (
-          <p>{message}</p>
-        )}
+        {renderMessage()}
       </div>
     </div>
   );

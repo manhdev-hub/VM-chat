@@ -84,3 +84,23 @@ export const validationUrl = (url: string) => {
   );
   return pattern.test(url);
 };
+
+export const base64ToArrayBuffer = (base64: string) => {
+  const binaryString = atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (var i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
+};
+export const dataURLtoFile = (dataUrl: string, filename: string) => {
+  const arr = dataUrl.split(",");
+  const mime : any =  arr[0].match(/:(.*?);/);
+  const bstr = atob(arr[arr.length - 1]);
+  let n: number = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime[1] });
+};

@@ -21,6 +21,7 @@ export type MessageType = {
   createdAt: any;
   id: string;
   isPlaying?: boolean;
+  type: string;
 };
 
 

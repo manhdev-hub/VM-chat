@@ -31,7 +31,7 @@ export const MessageItem = ({ name, lastMessage, id,handlerSelectedFriend }: Mes
       >
         <div style={{maxWidth: "178px"}}>
           <p style={{marginBottom: "5px", fontWeight: 500}}>{name}</p>
-          <p style={{fontSize: "15px"}}>{lastMessage}</p>
+          <p className="last-message" style={{fontSize: "15px"}}>{lastMessage}</p>
         </div>
         <p>1:30PM</p>
       </div>

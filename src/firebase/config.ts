@@ -3,6 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, connectAuthEmulator  } from "firebase/auth";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { FacebookAuthProvider } from "firebase/auth";
+import {connectStorageEmulator, getStorage} from 'firebase/storage'
 
 const firebaseConfig = {
     apiKey: "AIzaSyB80E2hn6auNm7rcCNKElD5ONZCpmE3HfM",
@@ -16,13 +17,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const storage = getStorage(app);
 const auth = getAuth(app);
-// connectAuthEmulator(auth, "http://127.0.0.1:9099");
 const db = getFirestore(app);
+
+// connectAuthEmulator(auth, "http://127.0.0.1:9099");
 // if(window.location.hostname === "localhost"){
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
+//   connectStorageEmulator(storage, "127.0.0.1", 9199);
 // }
 const fbProvider = new FacebookAuthProvider();
 
-
-export {db, auth, fbProvider}
+export {db, auth, fbProvider, storage}
