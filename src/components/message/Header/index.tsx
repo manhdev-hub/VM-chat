@@ -1,12 +1,12 @@
 import { Avatar, Button, Tooltip } from "antd";
 import React from "react";
 import { AppContext } from "../../../Context/app-provider";
-import { UserAddOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, UserAddOutlined } from "@ant-design/icons";
 import { PRIMARY_COLOR } from "../../../constants";
 import { AuthContext } from "../../../Context/auth-provider";
 
 export const Header = () => {
-  const { selectedRoom, members, users, setIsInviteMembersVisible } =
+  const { selectedRoom, members, users, setIsInviteMembersVisible, setIsOpenChat } =
     React.useContext(AppContext);
   const { user } = React.useContext(AuthContext);
 
@@ -22,6 +22,10 @@ export const Header = () => {
     return users.find((user) => user.uid === friendId);
   }, [friendId, users]);
 
+  const handlerCloseChat = () => {
+    setIsOpenChat(false);
+  }
+
   return (
     <div className="message-header">
       {selectedRoom?.isFriendRoom ? (
@@ -33,36 +37,50 @@ export const Header = () => {
               ? friend.displayName.charAt(0).toLocaleUpperCase()
               : "U"}
           </Avatar>
-          <div>
-            <p style={{ fontWeight: 500 }}>{friend?.displayName}</p>
-            <p
-              style={{
-                color: PRIMARY_COLOR,
-                fontSize: "12px",
-                marginTop: "4px",
-                fontWeight: 500,
-              }}
-            >
-              Online
-            </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div className="back-btn" onClick={handlerCloseChat}>
+              <ArrowLeftOutlined />
+            </div>
+            <div>
+              <p style={{ fontWeight: 500 }}>{friend?.displayName}</p>
+              <p
+                style={{
+                  color: PRIMARY_COLOR,
+                  fontSize: "12px",
+                  marginTop: "4px",
+                  fontWeight: 500,
+                }}
+              >
+                Online
+              </p>
+            </div>
           </div>
         </div>
       ) : (
         <>
-          <div>
-            <p
-              style={{ marginBottom: "5px", fontWeight: 700, fontSize: "20px" }}
-            >
-              {selectedRoom?.name}
-            </p>
-            <p
-              style={{
-                fontSize: "12px",
-                fontWeight: 500,
-              }}
-            >
-              {selectedRoom?.description}
-            </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="back-btn" onClick={handlerCloseChat}>
+              <ArrowLeftOutlined />
+            </div>
+            <div>
+              <p
+                style={{
+                  marginBottom: "5px",
+                  fontWeight: 700,
+                  fontSize: "20px",
+                }}
+              >
+                {selectedRoom?.name}
+              </p>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 500,
+                }}
+              >
+                {selectedRoom?.description}
+              </p>
+            </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <Button

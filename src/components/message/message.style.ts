@@ -66,8 +66,8 @@ export const MessageWrapper = styled.div`
     padding: 10px 13px;
     border-radius: 10px;
     width: fit-content;
-    a{
-        color: #2929ba;
+    a {
+      color: #2929ba;
     }
     &.me {
       background-color: ${PRIMARY_COLOR};
@@ -75,32 +75,41 @@ export const MessageWrapper = styled.div`
     }
   }
 
+  .back-btn {
+    display: none;
+  }
+
   @media only screen and (max-width: 768px) {
-    &{
-      /* display: none; */
+    & {
+      display: none;
     }
 
-    &.open-chat{
+    &.open-chat {
       width: 100%;
+      display: block;
     }
 
-    .message-header{
+    .message-header {
       width: calc(100% - 30px);
     }
 
     .send-message {
       left: 0;
       width: 100%;
-      bottom: 10px;
+      bottom: -10px;
       padding: 0 6px;
     }
 
-    .list-chat{
+    .list-chat {
       height: calc(100% - ${HEADER_HEIGHT}px - 10px);
     }
 
-    .body-chat{
+    .body-chat {
       height: 100%;
+    }
+
+    .back-btn {
+      display: block;
     }
   }
 `;
